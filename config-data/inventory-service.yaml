@@ -1,2 +1,18 @@
-test:
-  value: "hola-config"
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
