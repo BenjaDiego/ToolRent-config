@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+
+        - id: loans-service
+          uri: lb://loans-service
+          predicates:
+            - Path=/loans/**
+
+        - id: clients-service
+          uri: lb://clients-service
+          predicates:
+            - Path=/clients/**
+
+        - id: pricing-service
+          uri: lb://pricing-service
+          predicates:
+            - Path=/pricing/**
+
+        - id: kardex-service
+          uri: lb://kardex-service
+          predicates:
+            - Path=/kardex/**
+
+        - id: reports-service
+          uri: lb://reports-service
+          predicates:
+            - Path=/reports/**
+
+        - id: users-service
+          uri: lb://users-service
+          predicates:
+            - Path=/users/**
